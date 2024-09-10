@@ -33,7 +33,9 @@ export const useFetchApi = reference => {
 		const response = await fetch(
 			'https://egorow198704.amocrm.ru/api/v4/leads',
 			config
-		).then(response => response.json())
+		)
+			.then(response => response.json())
+			.catch(error => console.error(error))
 
 		// const response = await axios.create({
 		// 	baseURL: 'https://egorow198704.amocrm.ru/api/v4/leads',
