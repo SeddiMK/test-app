@@ -22,9 +22,6 @@ export const useFetchApi = reference => {
 			'Access-Control-Allow-Headers':
 				'Content-Type, Authorization, X-Requested-With',
 		}
-		// const headers = {
-		// 	Authorization: 'Bearer ' + token,
-		// }
 
 		// const response = await fetch(url + 'leads', {
 		// 	mode: 'no-cors',headers,
