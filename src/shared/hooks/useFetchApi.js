@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 
 export const useFetchApi = reference => {
 	const url = process.env.REACT_APP_URL || ''
@@ -36,13 +35,6 @@ export const useFetchApi = reference => {
 		)
 			.then(response => response.json())
 			.catch(error => console.error(error))
-
-		// const response = await axios.create({
-		// 	baseURL: 'https://egorow198704.amocrm.ru/api/v4/leads',
-		// 	timeout: 333,
-		// 	mode: 'no-cors',
-		// 	headers: { Authorization: `Bearer ${token}` },
-		// })
 
 		setDataApi(response)
 	}
