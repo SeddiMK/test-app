@@ -2,7 +2,7 @@
 	"name": "test-app",
 	"version": "0.1.0",
 	"private": true,
-	"proxy": "https://test-app-zeta-puce.vercel.app",
+	"proxy": "https://gitlab.com",
 	"dependencies": {
 		"@testing-library/jest-dom": "^5.17.0",
 		"@testing-library/react": "^13.4.0",
