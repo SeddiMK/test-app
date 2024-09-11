@@ -5,10 +5,10 @@ export const useFetchApi = reference => {
 	const token = process.env.REACT_APP_AMOCRM_LONG_TERM_TOKEN || ''
 	const [dataApi, setDataApi] = useState([])
 
-	console.log(dataApi, 'dataApi-----------')
+	// console.log(dataApi, 'dataApi-----------')
 
 	const getData = async () => {
-		console.log(reference.current, 'reference-----------')
+		// console.log(reference.current, 'reference-----------')
 
 		const config = {
 			method: 'GET',
@@ -16,10 +16,6 @@ export const useFetchApi = reference => {
 			headers: {
 				Authorization: 'Bearer ' + token,
 			},
-			'Access-Control-Allow-Origin': '*',
-			'Access-Control-Allow-Credentials': true,
-			'Access-Control-Allow-Headers':
-				'Content-Type, Authorization, X-Requested-With',
 		}
 
 		// const response = await fetch(url + 'leads', {
@@ -28,12 +24,43 @@ export const useFetchApi = reference => {
 
 		console.log(config, 'config-----------')
 
-		const response = await fetch(
-			'https://egorow198704.amocrm.ru/api/v4/leads',
-			config
+		var myHeaders = new Headers()
+		myHeaders.append(
+			'Authorization',
+			'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjZiNzViYWY1NWI2YmUwNzBkYTY2ZWQzYTQ3ODJmYTc5NzcwNzhhNTIzNTY3MTczNDE1MDg2ZjcwMzNlZjFjOWM4NmU5ZjA5MTY3ZDU2ZmNkIn0.eyJhdWQiOiJmMGM2ODY1MS1jMWE5LTRiZGMtYTRhMi02YjNjYmRiOTY4OWUiLCJqdGkiOiI2Yjc1YmFmNTViNmJlMDcwZGE2NmVkM2E0NzgyZmE3OTc3MDc4YTUyMzU2NzE3MzQxNTA4NmY3MDMzZWYxYzljODZlOWYwOTE2N2Q1NmZjZCIsImlhdCI6MTcyNTg3OTMzNCwibmJmIjoxNzI1ODc5MzM0LCJleHAiOjE3MzIwNjA4MDAsInN1YiI6IjExNDk1MTY2IiwiZ3JhbnRfdHlwZSI6IiIsImFjY291bnRfaWQiOjMxOTQwODEwLCJiYXNlX2RvbWFpbiI6ImFtb2NybS5ydSIsInZlcnNpb24iOjIsInNjb3BlcyI6WyJjcm0iLCJmaWxlcyIsImZpbGVzX2RlbGV0ZSIsIm5vdGlmaWNhdGlvbnMiLCJwdXNoX25vdGlmaWNhdGlvbnMiXSwiaGFzaF91dWlkIjoiZDZhYzFjNWYtY2I5Ni00ZTVlLWE2NDUtYTZmYTljMDJhZDE4IiwiYXBpX2RvbWFpbiI6ImFwaS1iLmFtb2NybS5ydSJ9.Yj4fVczCC0PAVNf3S_cBAOtAXWBAYTcOnGry5XvLwjNmH3eeTFhMXaRzxofDWDNPKKMSmNLcPSfJuODDkoSv87411S6y-TvIg5XN-fBw0PWWedITWMptKgChc_SoyQZMe0iKz2ULkHg-ynnPII0AQjGAacBHI_T3vMfro1j-CBYSUqRGnzJA3lYjsHiI4NY30BLF1QqBzqJk04iZQAVgASt2FP-t04d7Ze2bb8BwUkawtXksNpn6ZCcmP_FBhKjyirYI7VO7v0ce0D0CAeAUo7fbIfAbxVsRq7Y840PonV2Vo2QU0f9ec3t1_54JIkMfd6xbZAXQZ1bX3bCRmwYMYQ'
 		)
-			.then(response => response.json())
-			.catch(error => console.error(error))
+		myHeaders.append(
+			'Cookie',
+			'session_id=hjm3fd98liefs93omjnft1dvtp; user_lang=ru'
+		)
+
+		var requestOptions = {
+			method: 'GET',
+			// mode: 'no-cors',
+			headers: myHeaders,
+			redirect: 'follow',
+		}
+
+		fetch('https://egorow198704.amocrm.ru/api/v4/leads', requestOptions)
+			.then(response => response.text())
+			.then(result => {
+				console.log(result)
+				setDataApi(result)
+			})
+			.catch(error => console.log('error', error))
+
+		// const response = await fetch(
+		// 	'https://egorow198704.amocrm.ru/api/v4/leads',
+		// 	{
+		// 		method: 'GET',
+		// 		mode: 'no-cors',
+		// 		headers: {
+		// 			Authorization: 'Bearer ' + token,
+		// 		},
+		// 	}
+		// )
+		// 	.then(response => response.json())
+		// 	.catch(error => console.error(error))
 
 		// const response = await axios.create({
 		// 	baseURL: 'https://egorow198704.amocrm.ru/api/v4/leads',
@@ -42,7 +69,7 @@ export const useFetchApi = reference => {
 		// 	headers: { Authorization: `Bearer ${token}` },
 		// })
 
-		setDataApi(response)
+		// setDataApi(response)
 	}
 
 	useEffect(() => {
